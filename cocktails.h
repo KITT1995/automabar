@@ -1,3 +1,5 @@
+#include "Arduino.h"
+#include <LiquidCrystal_I2C.h>
 #define pumpGin 5
 #define pumpVodka 6
 #define pumpLemon 7
@@ -9,9 +11,12 @@
 // tempo in millisecondi che dovrebbe metterci in totale un bicchiere a riempirsi
 #define glassUnityTime 10000
 
-#include "Arduino.h"
-
+extern LiquidCrystal_I2C lcd;
 extern bool delivery;
+extern int selectedCocktail;
+extern unsigned long timer;
+extern String cocktail[];
+extern byte progressSimbol[];
 
 void GinLemon ();
 void GinTonic ();
@@ -20,5 +25,6 @@ void VodkaLemon ();
 void JagerBomb ();
 void Spritz ();
 void VodkaRedbull ();
-void inizialize_pomp();
+void inizialize_pump();
+void callCocktail();
 
