@@ -1,9 +1,33 @@
 #include "cocktails.h"
+unsigned long currentMillis;
 
 void GinLemon() {
-  // Test
-  digitalWrite(pumpGin, HIGH);
+  
+  // una parte di gin e due di lemon
+  currentMillis = millis();
   delivery = 1;
+
+  digitalWrite(pumpGin, HIGH);
+  digitalWrite(pumpLemon, HIGH);
+
+  do{
+    if(millis() - currentMillis >= (glassUnityTime / 3)){
+      delivery = 0;
+      digitalWrite(pumpGin, LOW);
+    }
+  }while(delivery == 1);
+
+  currentMillis = millis();
+  delivery = 1;
+
+  do{
+    if(millis() - currentMillis >= (glassUnityTime / 3)){
+      delivery = 0;
+      digitalWrite(pumpLemon, LOW);
+    }
+  }while(delivery == 1);
+
+  
 }
 
 void inizialize_pomp(){
