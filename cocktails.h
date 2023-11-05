@@ -8,6 +8,7 @@
 #define pumpMonster 12
 #include "Arduino.h"
 extern bool delivery;
+
 void GinLemon ();
 void GinTonic ();
 void VodkaTonic ();
@@ -15,3 +16,5 @@ void VodkaLemon ();
 void JagerBomb ();
 void Spritz ();
 void VodkaRedbull ();
+void inizialize_pomp();
+

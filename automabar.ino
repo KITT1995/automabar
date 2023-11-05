@@ -10,26 +10,24 @@ bool delivery = 0;
 String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonik", "Vodka Lemon", "Jager Bomb", "Spritz", "Vodka Redbull"};
 
 void setup() {
-  // put your setup code here, to run once:
+
   pinMode(btnUp, INPUT);
   pinMode(btnDown, INPUT);
   pinMode(btnOk, INPUT);
-  pinMode(pumpGin, OUTPUT);
-  pinMode(pumpVodka, OUTPUT);
-  pinMode(pumpLemon, OUTPUT);
-  pinMode(pumpTonic, OUTPUT);
-  pinMode(pumpAperol, OUTPUT);
-  pinMode(pumpProsecco, OUTPUT);
-  pinMode(pumpJager, OUTPUT);
+
+  inizialize_pomp();
+  
   Serial.begin(9600);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  if (delivery = 0) {
+  
+  if (delivery == 0) {
     Serial.print(cocktail[selectedCocktail]);
     if (digitalRead(btnUp) == HIGH) {
       if (selectedCocktail == 0) {
+        //se viene cliccato il pulsante su quando il cocktail selezionato 
+        //è il primo allora si giunge all'ultimo selezionato altrimenti si prosegue con la lista
         selectedCocktail = totCocktails - 1;
       }
       else {
@@ -38,6 +36,7 @@ void loop() {
     }
     else if (digitalRead(btnDown) == HIGH) {
       if (selectedCocktail == totCocktails - 1) {
+        //al contrario se il cocktail selezionato è l'ultimo
         selectedCocktail = 0;
       }
       else {
