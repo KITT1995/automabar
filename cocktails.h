@@ -8,6 +8,7 @@
 #define pumpProsecco 10
 #define pumpJager 11
 #define pumpMonster 12
+#define pumpRedbull 13
 // tempo in millisecondi che dovrebbe metterci in totale un bicchiere a riempirsi
 #define glassUnityTime 10000
 
@@ -22,9 +23,9 @@ void GinLemon ();
 void GinTonic ();
 void VodkaTonic ();
 void VodkaLemon ();
+void VodkaRedbull ();
 void JagerBomb ();
 void Spritz ();
-void VodkaRedbull ();
 void inizialize_pump();
 void callCocktail();
 

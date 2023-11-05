@@ -9,7 +9,7 @@ unsigned long timer = 0;
 bool delivery = 0;
 byte progressSymbol[] = {B11111, B11111, B11111, B11111, B11111, B11111, B11111, B11111};
 
-String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonik", "Vodka Lemon", "Jager Bomb", "Spritz", "Vodka Redbull"};
+String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonik", "Vodka Lemon", "Vodka Redbull", "Jager Bomb", "Spritz"};
 
 void setup() {
   lcd.init();
