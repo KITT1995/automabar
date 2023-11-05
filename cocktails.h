@@ -7,8 +7,7 @@
 #define pumpAperol 9
 #define pumpProsecco 10
 #define pumpJager 11
-#define pumpMonster 12
-#define pumpRedbull 13
+#define pumpRedbull 12
 // tempo in millisecondi che dovrebbe metterci in totale un bicchiere a riempirsi
 #define glassUnityTime 10000
 
