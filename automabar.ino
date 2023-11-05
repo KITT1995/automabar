@@ -1,5 +1,4 @@
 #include "cocktails.h"
-#include <LiquidCrystal_I2C.h>
 #define btnUp 2
 #define btnDown 3
 #define btnOk 4
@@ -8,18 +7,18 @@
 int selectedCocktail = 0;
 unsigned long timer = 0;
 bool delivery = 0;
-
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+byte progressSymbol[] = {B11111, B11111, B11111, B11111, B11111, B11111, B11111, B11111};
 
 String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonik", "Vodka Lemon", "Jager Bomb", "Spritz", "Vodka Redbull"};
 
 void setup() {
   lcd.init();
   lcd.backlight();
+  lcd.createChar(0, progressSymbol);
   pinMode(btnUp, INPUT);
   pinMode(btnDown, INPUT);
   pinMode(btnOk, INPUT);
-  inizialize_pomp();
+  inizialize_pump();
 }
 
 void loop() {
@@ -53,6 +52,11 @@ void loop() {
         }
         lcd.clear();
         timer = millis();
+      }
+      else if (digitalRead(btnOk) == HIGH) {
+        delivery = 1;
+        timer = millis();
+        callCocktail();
       }
     } 
   }
