@@ -21,8 +21,13 @@ void setup() {
 }
 
 void loop() {
+
+  if (digitalRead(btnOk) == HIGH){
+    Serial.print("gin lemon");
+    GinLemon();
+  }
   
-  if (delivery == 0) {
+  /*if (delivery == 0) {
     Serial.print(cocktail[selectedCocktail]);
     if (digitalRead(btnUp) == HIGH) {
       if (selectedCocktail == 0) {
@@ -43,5 +48,5 @@ void loop() {
         selectedCocktail += 1;
       }
     }
-  }
+  }*/
 }
