@@ -18,9 +18,40 @@ void inizialize_pump(){
 void GinLemon() {
   // una parte di gin e due di lemon
   //currentMillis = millis();
-  int pumpsVet[] = {pumpGin,pumpLemon};
-  inizializeCocktail(pumpsVet);
-  executeCocktail2ingredients(1,2,pumpsVet[0],pumpsVet[1]);  
+  int pumps[] = {pumpGin,pumpLemon};
+  int parts[] = {1,2};
+  inizializeCocktail(pumps);
+  executeCocktail(parts, pumps);  
+}
+
+void executeCocktail(int* part, int* pumps){
+
+  int sumParts = 0;
+  int totParts = sizeof(part);
+
+  for(int i = 0; i<totParts; i++){
+    sumParts += part[i];
+  }
+
+  do{
+    for(int i = 0; i < totParts; i++){
+      if (millis() - timer >= (glassUnityTime * part[i]) / (sumParts)){
+        digitalWrite(pumps[i], LOW);
+        if(i == (totParts-1))
+          delivery = 0;
+      } 
+
+
+      if (millis() - timer < (glassUnityTime * part[totParts]) / (sumParts)){
+      
+      lcd.setCursor((millis() - timer) * 16 / (glassUnityTime * part[0]) / (sumParts) ,1);
+      //lcd.print((millis() - timer) * 16 / (glassUnityTime * 2 / 3));
+      lcd.write(0);
+      }
+    }
+  }while(delivery == 1);
+  
+  lcd.clear();
 }
 
 /*
@@ -34,14 +65,15 @@ void executeCocktail2ingredients(int minorPart,int majorPart, int minorPartPump,
     //in quel caso bisogna controllare che faccia la
     //divisione con virgola e non tra interi
     if (millis() - timer >= (glassUnityTime * minorPart) / (minorPart + majorPart)){
-    digitalWrite(minorPartPump, LOW);
-    }
-    
+      digitalWrite(minorPartPump, LOW);
+      //delivery = 0;
+    }    
     if (millis() - timer >= (glassUnityTime * majorPart) / (minorPart + majorPart)){
       digitalWrite(majorPartPump, LOW);
-    }
-    else {
       delivery = 0;
+    }
+    if (millis() - timer < (glassUnityTime * majorPart) / (minorPart + majorPart)){
+      
       lcd.setCursor((millis() - timer) * 16 / (glassUnityTime * minorPart) / (minorPart + majorPart) ,1);
       //lcd.print((millis() - timer) * 16 / (glassUnityTime * 2 / 3));
       lcd.write(0);
@@ -81,49 +113,55 @@ void executeCocktail3ingredients(int minorPart, int mediumPart, int majorPart, i
 
 void GinTonic() {
   // una parte di gin e due di tonica
-  int pumpsVet[] = {pumpGin,pumpTonic};
-  inizializeCocktail(pumpsVet);
-  executeCocktail2ingredients(1,2,pumpsVet[0],pumpsVet[1]);  
+  int pumps[] = {pumpGin,pumpLemon};
+  int parts[] = {1,2};
+  inizializeCocktail(pumps);
+  executeCocktail(parts, pumps);  
 
 }
 
 void VodkaTonic() {
   // una parte di vodka e due di tonica
-  int pumpsVet[] = {pumpVodka,pumpTonic};
-  inizializeCocktail(pumpsVet);
-  executeCocktail2ingredients(1,2,pumpsVet[0],pumpsVet[1]);  
+  int pumps[] = {pumpVodka,pumpTonic};
+  int parts[] = {1,2};
+  inizializeCocktail(pumps);
+  executeCocktail(parts, pumps);    
 
 }
 
 void VodkaLemon() {
   // una parte di vodka e due di lemon
-  int pumpsVet[] = {pumpVodka,pumpLemon};
-  inizializeCocktail(pumpsVet);
-  executeCocktail2ingredients(1,2,pumpsVet[0],pumpsVet[1]);  
+  int pumps[] = {pumpVodka,pumpLemon};
+  int parts[] = {1,2};
+  inizializeCocktail(pumps);
+  executeCocktail(parts, pumps);  
   
 }
 
 void VodkaRedbull() {
   // una 3 di vodka e 7 di redbull
-  int pumpsVet[] = {pumpVodka,pumpRedbull};
-  inizializeCocktail(pumpsVet);
-  executeCocktail2ingredients(3,7,pumpsVet[0],pumpsVet[1]);  
+  int pumps[] = {pumpVodka,pumpRedbull};
+  int parts[] = {3,7};
+  inizializeCocktail(pumps);
+  executeCocktail(parts, pumps);  
 
 }
 
 void JagerBomb() {
   // una parte di jager e tre di redbull
-  int pumpsVet[] = {pumpJager,pumpRedbull};
-  inizializeCocktail(pumpsVet);
-  executeCocktail2ingredients(1,3,pumpsVet[0],pumpsVet[1]);  
+  int pumps[] = {pumpJager,pumpRedbull};
+  int parts[] = {1,3};
+  inizializeCocktail(pumps);
+  executeCocktail(parts, pumps);   
 
 }
 
 void Spritz() {
   // tre parti di prosecco, due di aperol e una di tonica
-  int pumpsVet[] = {pumpTonic,pumpAperol,pumpProsecco};
-  inizializeCocktail(pumpsVet);
-  executeCocktail3ingredients(1,2,3,pumpsVet[0],pumpsVet[1],pumpsVet[2]);  
+  int pumps[] = {pumpTonic,pumpAperol,pumpProsecco};
+  int parts[] = {1,2};
+  inizializeCocktail(pumps);
+  executeCocktail(parts, pumps);   
 
 }
 

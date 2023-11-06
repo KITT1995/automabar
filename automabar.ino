@@ -27,6 +27,7 @@ void loop() {
   if (delivery == 0) {
     lcd.setCursor(0, 0);
     lcd.print("Selezionare");
+    Serial
     lcd.setCursor(0, 1);
     lcd.print(cocktail[selectedCocktail]);
     if (millis() - timer >= 200) {
