@@ -3,11 +3,12 @@
 #define btnDown 3
 #define btnOk 4
 #define totCocktails 7
+#define progrSymbol B11111
 
 int selectedCocktail = 0;
 unsigned long timer = 0;
 bool delivery = 0;
-byte progressSymbol[] = {B11111, B11111, B11111, B11111, B11111, B11111, B11111, B11111};
+byte progressSymbol[] = {progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol};
 
 String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonik", "Vodka Lemon", "Vodka Redbull", "Jager Bomb", "Spritz"};
 
