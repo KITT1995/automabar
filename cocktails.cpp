@@ -2,7 +2,7 @@
 extern LiquidCrystal_I2C lcd(0x27, 16, 2);
 // unsigned long currentMillis;
 
-void inizialize_pump(){
+void initialize_pump(){
   pinMode(pumpGin, OUTPUT);
   pinMode(pumpVodka, OUTPUT);
   pinMode(pumpLemon, OUTPUT);
@@ -15,8 +15,6 @@ void inizialize_pump(){
   pinMode(pumpCoke, OUTPUT);
 }
 
-
-
 void GinLemon() {
   // una parte di gin e due di lemon
   //currentMillis = millis();
@@ -26,14 +24,12 @@ void GinLemon() {
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));  
 }
 
-
 void GinTonic() {
   // una parte di gin e due di tonica
   int pumps[] = {pumpGin,pumpLemon};
   int parts[] = {1,2};
  // inizializeCocktail(pumps);
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));  
-
 }
 
 void VodkaTonic() {
@@ -42,7 +38,6 @@ void VodkaTonic() {
   int parts[] = {1,2};
   //inizializeCocktail(pumps);
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));    
-
 }
 
 void VodkaLemon() {
@@ -51,7 +46,6 @@ void VodkaLemon() {
   int parts[] = {1,2};
   //inizializeCocktail(pumps);
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));  
-  
 }
 
 void VodkaRedbull() {
@@ -60,7 +54,6 @@ void VodkaRedbull() {
   int parts[] = {3,7};
   //inizializeCocktail(pumps);
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));  
-
 }
 
 void JagerBomb() {
@@ -69,23 +62,19 @@ void JagerBomb() {
   int parts[] = {1,3};
   //inizializeCocktail(pumps);
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));   
-
 }
 
 void Spritz() {
   // tre parti di prosecco, due di aperol e una di tonica
   int pumps[] = {pumpTonic,pumpAperol,pumpProsecco};
   int parts[] = {1,2,3};
-  
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));   
-
 }
 
 void Fernesito(){
   //1 fernet e 4 coca
    int pumps[] = {pumpFernet,pumpCoke};
   int parts[] = {1,4};
-  
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));   
 }
 
@@ -115,14 +104,10 @@ void callCocktail() {
     case 7:
       Fernesito();
       break;
-    case 8:
-    case 9:
-      break;
   } 
 }
 
-void inizializeCocktail(int* pumpsVet, int lenght){
-
+void initializeCocktail(int* pumpsVet, int lenght){
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print(cocktail[selectedCocktail]);
@@ -132,7 +117,6 @@ void inizializeCocktail(int* pumpsVet, int lenght){
   //Serial.println(lenght);
   for(int i = 0; i < lenght; i++){
     //accende tutte le pompe che devono essere utilizzate
-    
     //Serial.println(pumpsVet[i]);
     digitalWrite(pumpsVet[i], HIGH);
   }
@@ -147,7 +131,7 @@ void inizializeCocktail(int* pumpsVet, int lenght){
 */
 void executeCocktail(int* part, int* pumps, int lenght){
   
-  inizializeCocktail(pumps, lenght);
+  initializeCocktail(pumps, lenght);
   int sumParts = 0;
   int totParts = lenght;
 
@@ -163,16 +147,19 @@ void executeCocktail(int* part, int* pumps, int lenght){
           delivery = 0;
         }          
       } 
-
-      if (millis() - timer < (glassUnityTime / sumParts) * part[totParts]){
-      
-      lcd.setCursor((millis() - timer) * 16 / (glassUnityTime / sumParts)* part[0]  ,1);
-      //lcd.print((millis() - timer) * 16 / (glassUnityTime * 2 / 3));
-      lcd.write(0);
+      if (millis() - timer < (glassUnityTime / sumParts) * part[totParts - 1]){
+        //lcd.setCursor(0,1);
+        lcd.setCursor((millis() - timer) * 16 / ((glassUnityTime / sumParts)* part[totParts - 1]),1);
+        lcd.write(0);
       }
     }
+    if (digitalRead(btnOk) == HIGH) {
+      if (millis() - timer >= delay){
+        delivery = 0;
+        timer = millis();
+      } 
+    }  
   }while(delivery == 1);
-  
+
   lcd.clear();
 }
-

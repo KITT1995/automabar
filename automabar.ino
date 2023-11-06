@@ -1,7 +1,4 @@
 #include "cocktails.h"
-#define btnUp 2
-#define btnDown 3
-#define btnOk 4
 #define totCocktails 8
 #define totIngredients 10
 #define progrSymbol B11111
@@ -21,19 +18,18 @@ void setup() {
   pinMode(btnUp, INPUT);
   pinMode(btnDown, INPUT);
   pinMode(btnOk, INPUT);
-  inizialize_pump();
-  Serial.begin(9600);
+  initialize_pump();
+  //Serial.begin(9600);
 }
 
 void loop() {
-  
   if (delivery == 0) {
     lcd.setCursor(0, 0);
     lcd.print("Selezionare");
     lcd.setCursor(0, 1);
     lcd.print(cocktail[selectedCocktail]);
     
-    if (millis() - timer >= 200) {
+    if (millis() - timer >= delay) {
       //delay
       if (digitalRead(btnUp) == HIGH) {
         if (selectedCocktail == 0) {
@@ -56,12 +52,11 @@ void loop() {
         else {
           selectedCocktail += 1;
         }
-        Serial.println(cocktail[selectedCocktail]);
+        //Serial.println(cocktail[selectedCocktail]);
         lcd.clear();
         timer = millis();
       }
       else if (digitalRead(btnOk) == HIGH) {
-        
         delivery = 1;
         timer = millis();
         callCocktail();
