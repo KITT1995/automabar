@@ -20,94 +20,8 @@ void GinLemon() {
   //currentMillis = millis();
   int pumps[] = {pumpGin,pumpLemon};
   int parts[] = {1,2};
-  inizializeCocktail(pumps);
-  executeCocktail(parts, pumps);  
-}
-
-void executeCocktail(int* part, int* pumps){
-
-  int sumParts = 0;
-  int totParts = sizeof(part);
-
-  for(int i = 0; i<totParts; i++){
-    sumParts += part[i];
-  }
-
-  do{
-    for(int i = 0; i < totParts; i++){
-      if (millis() - timer >= (glassUnityTime * part[i]) / (sumParts)){
-        digitalWrite(pumps[i], LOW);
-        if(i == (totParts-1))
-          delivery = 0;
-      } 
-
-
-      if (millis() - timer < (glassUnityTime * part[totParts]) / (sumParts)){
-      
-      lcd.setCursor((millis() - timer) * 16 / (glassUnityTime * part[0]) / (sumParts) ,1);
-      //lcd.print((millis() - timer) * 16 / (glassUnityTime * 2 / 3));
-      lcd.write(0);
-      }
-    }
-  }while(delivery == 1);
-  
-  lcd.clear();
-}
-
-/*
-  @minorPart e @majorPart vanno inserite le parti di ingredienti che vanno in ordine crescente
-  @minorPartPump e @majorPartPump vanno inserite le pompe relativmentealle parti in ordine crescente
-*/
-void executeCocktail2ingredients(int minorPart,int majorPart, int minorPartPump,int majorPartPump){
-
-  do{
-    //potrebbe comportarsi male se il primo valore è 1. 
-    //in quel caso bisogna controllare che faccia la
-    //divisione con virgola e non tra interi
-    if (millis() - timer >= (glassUnityTime * minorPart) / (minorPart + majorPart)){
-      digitalWrite(minorPartPump, LOW);
-      //delivery = 0;
-    }    
-    if (millis() - timer >= (glassUnityTime * majorPart) / (minorPart + majorPart)){
-      digitalWrite(majorPartPump, LOW);
-      delivery = 0;
-    }
-    if (millis() - timer < (glassUnityTime * majorPart) / (minorPart + majorPart)){
-      
-      lcd.setCursor((millis() - timer) * 16 / (glassUnityTime * minorPart) / (minorPart + majorPart) ,1);
-      //lcd.print((millis() - timer) * 16 / (glassUnityTime * 2 / 3));
-      lcd.write(0);
-    }
-  }while(delivery == 1);
-
-lcd.clear();
-}
-
-/*
-  @minorPart e @majorPart vanno inserite le parti di ingredienti che vanno in ordine crescente
-  @minorPartPump e @majorPartPump vanno inserite le pompe relativmentealle parti in ordine crescente
-*/
-void executeCocktail3ingredients(int minorPart, int mediumPart, int majorPart, int minorPartPump,int mediumPartPump, int majorPartPump){
-
-  do{
-    if (millis() - timer >= (glassUnityTime * majorPart) / (minorPart + mediumPart + majorPart)){
-      delivery = 0;
-      digitalWrite(majorPartPump, LOW);
-    }
-    else {
-      lcd.setCursor((millis() - timer) * 16 / (glassUnityTime * majorPart) / (minorPart + mediumPart + majorPart) ,1);
-      //lcd.print((millis() - timer) * 16 / (glassUnityTime * 2 / 3));
-      lcd.write(0);
-    }
-    if (millis() - timer >= (glassUnityTime * mediumPart) / (minorPart + mediumPart + majorPart)){
-      digitalWrite(mediumPartPump, LOW);
-    }
-    if (millis() - timer >= (glassUnityTime * minorPart) / (minorPart + mediumPart + majorPart)){
-      digitalWrite(minorPartPump, LOW);
-    }
-  }while(delivery == 1);
-
-  lcd.clear();
+ // inizializeCocktail(pumps);
+  executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));  
 }
 
 
@@ -115,8 +29,8 @@ void GinTonic() {
   // una parte di gin e due di tonica
   int pumps[] = {pumpGin,pumpLemon};
   int parts[] = {1,2};
-  inizializeCocktail(pumps);
-  executeCocktail(parts, pumps);  
+ // inizializeCocktail(pumps);
+  executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));  
 
 }
 
@@ -124,8 +38,8 @@ void VodkaTonic() {
   // una parte di vodka e due di tonica
   int pumps[] = {pumpVodka,pumpTonic};
   int parts[] = {1,2};
-  inizializeCocktail(pumps);
-  executeCocktail(parts, pumps);    
+  //inizializeCocktail(pumps);
+  executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));    
 
 }
 
@@ -133,8 +47,8 @@ void VodkaLemon() {
   // una parte di vodka e due di lemon
   int pumps[] = {pumpVodka,pumpLemon};
   int parts[] = {1,2};
-  inizializeCocktail(pumps);
-  executeCocktail(parts, pumps);  
+  //inizializeCocktail(pumps);
+  executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));  
   
 }
 
@@ -142,8 +56,8 @@ void VodkaRedbull() {
   // una 3 di vodka e 7 di redbull
   int pumps[] = {pumpVodka,pumpRedbull};
   int parts[] = {3,7};
-  inizializeCocktail(pumps);
-  executeCocktail(parts, pumps);  
+  //inizializeCocktail(pumps);
+  executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));  
 
 }
 
@@ -151,17 +65,17 @@ void JagerBomb() {
   // una parte di jager e tre di redbull
   int pumps[] = {pumpJager,pumpRedbull};
   int parts[] = {1,3};
-  inizializeCocktail(pumps);
-  executeCocktail(parts, pumps);   
+  //inizializeCocktail(pumps);
+  executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));   
 
 }
 
 void Spritz() {
   // tre parti di prosecco, due di aperol e una di tonica
   int pumps[] = {pumpTonic,pumpAperol,pumpProsecco};
-  int parts[] = {1,2};
-  inizializeCocktail(pumps);
-  executeCocktail(parts, pumps);   
+  int parts[] = {1,2,3};
+  
+  executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));   
 
 }
 
@@ -189,16 +103,58 @@ void callCocktail() {
   }
 }
 
-int inizializeCocktail(int* pumps){
+void inizializeCocktail(int* pumpsVet, int lenght){
 
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print(cocktail[selectedCocktail]);
   //inizializza l'lcd impostando il nome del cocktail che sta per eseguire
   delivery = 1;
-  for(int i = 0; i < sizeof(pumps); i++){
+  
+  //Serial.println(lenght);
+  for(int i = 0; i < lenght; i++){
     //accende tutte le pompe che devono essere utilizzate
-    digitalWrite(pumps[i], HIGH);
+    
+    //Serial.println(pumpsVet[i]);
+    digitalWrite(pumpsVet[i], HIGH);
+  }
+}
+
+/*
+  @*part è il vettore delle parti di ogni ingrediente. il vettore deve essere in ordine crescente
+  @*pumps è il vettore degli ingredienti rispettivamente alle parti
+  @lenght è la lunghezz del vettore
+  si può migliorare il codice facendo un piccolo metodo che ordina il vettore delle parti e il rispettivo
+  vettore degli ingredienti
+*/
+void executeCocktail(int* part, int* pumps, int lenght){
+  
+  inizializeCocktail(pumps, lenght);
+  int sumParts = 0;
+  int totParts = lenght;
+
+  for(int i = 0; i<totParts; i++){
+    sumParts += part[i];
   }
 
+  do{
+    for(int i = 0; i < totParts; i++){
+      if (millis() - timer >= (glassUnityTime / sumParts) * part[i]){
+        digitalWrite(pumps[i], LOW);
+        if(i == (totParts-1)){
+          delivery = 0;
+        }          
+      } 
+
+      if (millis() - timer < (glassUnityTime / sumParts) * part[totParts]){
+      
+      lcd.setCursor((millis() - timer) * 16 / (glassUnityTime / sumParts)* part[0]  ,1);
+      //lcd.print((millis() - timer) * 16 / (glassUnityTime * 2 / 3));
+      lcd.write(0);
+      }
+    }
+  }while(delivery == 1);
+  
+  lcd.clear();
 }
+

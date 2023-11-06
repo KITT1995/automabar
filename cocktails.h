@@ -25,10 +25,10 @@ void VodkaLemon ();
 void VodkaRedbull ();
 void JagerBomb ();
 void Spritz ();
-int inizializeCocktail(int *pumps);
+void inizializeCocktail(int *pumps, int lenght);
 void executeCocktail3ingredients(int minorPart, int mediumPart, int majorPart, int minorPartPump,int mediumPartPump, int majorPartPump);
 void executeCocktail2ingredients(int minorPart,int majorPart, int minorPartPump,int majorPartPump);
-void executeCocktail(int* part, int* pumps);
+void executeCocktail(int* part, int* pumps, int lenght);
 void inizialize_pump();
 void callCocktail();
 
