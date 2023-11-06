@@ -11,6 +11,8 @@ void inizialize_pump(){
   pinMode(pumpProsecco, OUTPUT);
   pinMode(pumpJager, OUTPUT);
   pinMode(pumpRedbull, OUTPUT);
+  pinMode(pumpFernet, OUTPUT);
+  pinMode(pumpCoke, OUTPUT);
 }
 
 
@@ -79,28 +81,44 @@ void Spritz() {
 
 }
 
+void Fernesito(){
+  //1 fernet e 4 coca
+   int pumps[] = {pumpFernet,pumpCoke};
+  int parts[] = {1,4};
+  
+  executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));   
+}
+
 void callCocktail() {
-  if (selectedCocktail == 0) {
-    GinLemon();
-  }
-  else if (selectedCocktail == 1){
-    GinTonic();
-  }
-  else if (selectedCocktail == 2){
-    VodkaTonic();
-  }
-  else if (selectedCocktail == 3){
-    VodkaLemon();
-  }
-  else if (selectedCocktail == 4){
-    VodkaRedbull();
-  }
-  else if (selectedCocktail == 5){
-    JagerBomb();
-  }
-  else if (selectedCocktail == 6){
-    Spritz();
-  }
+  switch(selectedCocktail){
+    case 0: 
+      GinLemon();
+      break;
+    case 1:
+      GinTonic();
+      break;
+    case 2:
+      VodkaTonic();
+      break;
+    case 3:
+      VodkaLemon();
+      break;
+    case 4:
+      VodkaRedbull();
+      break;
+    case 5:
+      JagerBomb();
+      break;
+    case 6:
+      Spritz();
+      break;
+    case 7:
+      Fernesito();
+      break;
+    case 8:
+    case 9:
+      break;
+  } 
 }
 
 void inizializeCocktail(int* pumpsVet, int lenght){

@@ -2,7 +2,8 @@
 #define btnUp 2
 #define btnDown 3
 #define btnOk 4
-#define totCocktails 7
+#define totCocktails 8
+#define totIngredients 10
 #define progrSymbol B11111
 
 int selectedCocktail = 0;
@@ -10,7 +11,8 @@ unsigned long timer = 0;
 bool delivery = 0;
 byte progressSymbol[] = {progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol};
 
-String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonik", "Vodka Lemon", "Vodka Redbull", "Jager Bomb", "Spritz"};
+String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonic", "Vodka Lemon", "Vodka Redbull", "Jager Bomb", "Spritz", "Fernesito"};
+String ingredients[totIngredients] = {"Gin", "Vodka", "Redbull", "Lemon", "Tonica", "Aperol", "Fernet", "Prosecco", "CocaCola", "Jager"};
 
 void setup() {
   lcd.init();
@@ -35,7 +37,7 @@ void loop() {
       //delay
       if (digitalRead(btnUp) == HIGH) {
         if (selectedCocktail == 0) {
-          //se viene cliccato il pulsante su quando il cocktail selezionato 
+          //se viene cliccato il pulsante freccia su quando il cocktail selezionato 
           //è il primo allora si giunge all'ultimo selezionato altrimenti si prosegue con la lista
           selectedCocktail = totCocktails - 1;
         }
