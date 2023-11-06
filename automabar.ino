@@ -1,15 +1,13 @@
 #include "cocktails.h"
-#define totCocktails 8
-#define totIngredients 10
 #define progrSymbol B11111
 
-int selectedCocktail = 0;
+int selectedValue = 0;
 unsigned long timer = 0;
 bool delivery = 0;
 byte progressSymbol[] = {progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol};
 
-String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonic", "Vodka Lemon", "Vodka Redbull", "Jager Bomb", "Spritz", "Fernesito"};
-String ingredients[totIngredients] = {"Gin", "Vodka", "Redbull", "Lemon", "Tonica", "Aperol", "Fernet", "Prosecco", "CocaCola", "Jager"};
+String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonic", "Vodka Lemon", "Vodka Redbull", "Jager Bomb", "Spritz", "Fernesito", "Manuale"};
+String ingredients[totIngredients] = {"Aperol", "Coca Cola", "Fernet", "Gin", "Jager", "Lemon", "Prosecco", "Redbull", "Tonica", "Vodka", "Indietro"};
 
 void setup() {
   lcd.init();
@@ -27,32 +25,32 @@ void loop() {
     lcd.setCursor(0, 0);
     lcd.print("Selezionare");
     lcd.setCursor(0, 1);
-    lcd.print(cocktail[selectedCocktail]);
+    lcd.print(cocktail[selectedValue]);
     
     if (millis() - timer >= delay) {
       //delay
       if (digitalRead(btnUp) == HIGH) {
-        if (selectedCocktail == 0) {
+        if (selectedValue == 0) {
           //se viene cliccato il pulsante freccia su quando il cocktail selezionato 
           //è il primo allora si giunge all'ultimo selezionato altrimenti si prosegue con la lista
-          selectedCocktail = totCocktails - 1;
+          selectedValue = totCocktails - 1;
         }
         else {
-          selectedCocktail -= 1;
+          selectedValue -= 1;
         }
-        Serial.println(cocktail[selectedCocktail]);
+        //Serial.println(cocktail[selectedValue]);
         lcd.clear();
         timer = millis();
       }
       else if (digitalRead(btnDown) == HIGH) {
-        if (selectedCocktail == totCocktails - 1) {
+        if (selectedValue == totCocktails - 1) {
           //al contrario se il cocktail selezionato è l'ultimo
-          selectedCocktail = 0;
+          selectedValue = 0;
         }
         else {
-          selectedCocktail += 1;
+          selectedValue += 1;
         }
-        //Serial.println(cocktail[selectedCocktail]);
+        //Serial.println(cocktail[selectedValue]);
         lcd.clear();
         timer = millis();
       }

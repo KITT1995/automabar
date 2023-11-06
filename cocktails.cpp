@@ -73,13 +73,150 @@ void Spritz() {
 
 void Fernesito(){
   //1 fernet e 4 coca
-   int pumps[] = {pumpFernet,pumpCoke};
+  int pumps[] = {pumpFernet,pumpCoke};
   int parts[] = {1,4};
   executeCocktail(parts, pumps, sizeof(pumps)/sizeof(pumps[0]));   
 }
 
+void Manual(){
+  selectedValue = 0;
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Selezionare");
+  lcd.setCursor(0, 1);
+  lcd.print(ingredients[selectedValue]);
+  do{
+    if (millis() - timer >= delay) {
+      //delay
+      if (digitalRead(btnOk) == HIGH) {
+        if (selectedValue < totIngredients - 1){
+          callIngredient();
+        }
+        else {
+          selectedValue = totCocktails - 1;
+          delivery = 0;
+          timer = millis();
+          lcd.clear();
+          break;
+        }
+      }
+      else if (digitalRead(btnUp) == HIGH) {
+        if (selectedValue == 0) {
+          selectedValue = totIngredients - 1;
+        }
+        else {
+          selectedValue -= 1;
+        }
+        //Serial.println(ingredients[selectedValue]);
+        timer = millis();
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Selezionare");
+        lcd.setCursor(0, 1);
+        lcd.print(ingredients[selectedValue]);
+      }
+      else if (digitalRead(btnDown) == HIGH) {
+        if (selectedValue == totIngredients - 1) {
+          selectedValue = 0;
+        }
+        else {
+          selectedValue += 1;
+        }
+        //Serial.println(ingredients[selectedValue]);
+        timer = millis();
+        lcd.clear();
+        lcd.setCursor(0, 0);
+        lcd.print("Selezionare");
+        lcd.setCursor(0, 1);
+        lcd.print(ingredients[selectedValue]);
+      }
+    } 
+  }while(delivery == 1);
+}
+
+void callIngredient() {
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Erogazione");
+  lcd.setCursor(0, 1);
+  lcd.print(ingredients[selectedValue]);
+  do{
+    switch(selectedValue){
+      case 0:
+        digitalWrite(pumpAperol, HIGH);
+        break;
+      case 1:
+        digitalWrite(pumpCoke, HIGH);
+        break;
+      case 2:
+        digitalWrite(pumpFernet, HIGH);
+        break;
+      case 3:
+        digitalWrite(pumpGin, HIGH);
+        break;
+      case 4:
+        digitalWrite(pumpJager, HIGH);
+        break;
+      case 5:
+        digitalWrite(pumpLemon, HIGH);
+        break;
+      case 6:
+        digitalWrite(pumpProsecco, HIGH);
+        break;
+      case 7:
+        digitalWrite(pumpRedbull, HIGH);
+        break;
+      case 8:
+        digitalWrite(pumpTonic, HIGH);
+        break;
+      case 9:
+        digitalWrite(pumpVodka, HIGH);
+        break;
+    }
+  }while (digitalRead(btnOk) == HIGH);
+
+  switch(selectedValue){
+      case 0:
+        digitalWrite(pumpAperol, LOW);
+        break;
+      case 1:
+        digitalWrite(pumpCoke, LOW);
+        break;
+      case 2:
+        digitalWrite(pumpFernet, LOW);
+        break;
+      case 3:
+        digitalWrite(pumpGin, LOW);
+        break;
+      case 4:
+        digitalWrite(pumpJager, LOW);
+        break;
+      case 5:
+        digitalWrite(pumpLemon, LOW);
+        break;
+      case 6:
+        digitalWrite(pumpProsecco, LOW);
+        break;
+      case 7:
+        digitalWrite(pumpRedbull, LOW);
+        break;
+      case 8:
+        digitalWrite(pumpTonic, LOW);
+        break;
+      case 9:
+        digitalWrite(pumpVodka, LOW);
+        break;
+  }
+
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("Selezionare");
+  lcd.setCursor(0, 1);
+  lcd.print(ingredients[selectedValue]);
+}
+
 void callCocktail() {
-  switch(selectedCocktail){
+  switch(selectedValue){
     case 0: 
       GinLemon();
       break;
@@ -104,13 +241,16 @@ void callCocktail() {
     case 7:
       Fernesito();
       break;
+    case 8:
+      Manual();
+      break;
   } 
 }
 
 void initializeCocktail(int* pumpsVet, int lenght){
   lcd.clear();
   lcd.setCursor(0, 0);
-  lcd.print(cocktail[selectedCocktail]);
+  lcd.print(cocktail[selectedValue]);
   //inizializza l'lcd impostando il nome del cocktail che sta per eseguire
   delivery = 1;
   
@@ -155,6 +295,9 @@ void executeCocktail(int* part, int* pumps, int lenght){
     }
     if (digitalRead(btnOk) == HIGH) {
       if (millis() - timer >= delay){
+        for(int i = 0; i < totParts; i++){
+          digitalWrite(pumps[i], LOW);
+        }
         delivery = 0;
         timer = millis();
       } 
