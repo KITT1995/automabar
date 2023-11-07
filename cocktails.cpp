@@ -2,7 +2,7 @@
 extern LiquidCrystal_I2C lcd(0x27, 16, 2);
 // unsigned long currentMillis;
 
-void initialize_pump(){
+void initialize_pins(){
   pinMode(pumpGin, OUTPUT);
   pinMode(pumpVodka, OUTPUT);
   pinMode(pumpLemon, OUTPUT);
@@ -13,6 +13,10 @@ void initialize_pump(){
   pinMode(pumpRedbull, OUTPUT);
   pinMode(pumpFernet, OUTPUT);
   pinMode(pumpCoke, OUTPUT);
+
+  pinMode(btnUp, INPUT);
+  pinMode(btnDown, INPUT);
+  pinMode(btnOk, INPUT);
 }
 
 void GinLemon() {
@@ -140,6 +144,7 @@ void callIngredient() {
   lcd.print("Erogazione");
   lcd.setCursor(0, 1);
   lcd.print(ingredients[selectedValue]);
+  
   do{
     switch(selectedValue){
       case 0:

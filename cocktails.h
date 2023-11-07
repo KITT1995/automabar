@@ -18,6 +18,7 @@
 #define delay 200
 #define totCocktails 9
 #define totIngredients 11
+#define progrSymbol B11111
 
 extern LiquidCrystal_I2C lcd;
 extern bool delivery;
@@ -40,6 +41,6 @@ void initializeCocktail(int *pumps, int lenght);
 void executeCocktail3ingredients(int minorPart, int mediumPart, int majorPart, int minorPartPump,int mediumPartPump, int majorPartPump);
 void executeCocktail2ingredients(int minorPart,int majorPart, int minorPartPump,int majorPartPump);
 void executeCocktail(int* part, int* pumps, int lenght);
-void initialize_pump();
+void initialize_pins();
 void callCocktail();
 void callIngredient();
