@@ -217,30 +217,30 @@ void callIngredient() {
 
 void callCocktail() {
   switch(selectedValue){
-    case 0: 
-      GinLemon();
-      break;
-    case 1:
-      GinTonic();
-      break;
-    case 2:
-      VodkaTonic();
-      break;
-    case 3:
-      VodkaLemon();
-      break;
-    case 4:
-      VodkaRedbull();
-      break;
-    case 5:
-      JagerBomb();
-      break;
-    case 6:
-      Spritz();
-      break;
-    case 7:
+    case 0:
       Fernesito();
       break;
+    case 1: 
+      GinLemon();
+      break;
+    case 2:
+      GinTonic();
+      break;
+    case 3:
+      JagerBomb();
+      break;
+    case 4:
+      Spritz();
+      break; 
+    case 5:
+      VodkaLemon();
+      break;
+    case 6:
+      VodkaRedbull();
+      break;   
+    case 7:
+      VodkaTonic();
+      break;    
     case 8:
       Manual();
       break;

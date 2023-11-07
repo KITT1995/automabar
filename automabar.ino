@@ -6,7 +6,7 @@ unsigned long timer = 0;
 bool delivery = 0;
 byte progressSymbol[] = {progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol};
 
-String cocktail[totCocktails] = {"Gin Lemon", "Gin Tonic", "Vodka Tonic", "Vodka Lemon", "Vodka Redbull", "Jager Bomb", "Spritz", "Fernesito", "Manuale"};
+String cocktail[totCocktails] = { "Fernesito", "Gin Lemon", "Gin Tonic", "Jager Bomb", "Spritz", "Vodka Lemon", "Vodka Redbull", "Vodka Tonic", "Manuale"};
 String ingredients[totIngredients] = {"Aperol", "Coca Cola", "Fernet", "Gin", "Jager", "Lemon", "Prosecco", "Redbull", "Tonica", "Vodka", "Indietro"};
 
 void setup() {
