@@ -8,6 +8,7 @@ Features:
 - Custom cocktails
 <br>
 Todo:
+<br>
 - [ ] Check bottle emptiness
 - [ ] touch sensor as buttons sobstitution 
 - [ ] create a PCB for do it easier
