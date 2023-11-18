@@ -9,6 +9,8 @@ Features:
 <br>
 Todo:
 <br>
-- [ ] Check bottle emptiness
-- [ ] touch sensor as buttons sobstitution 
-- [ ] create a PCB for do it easier
+<ul>
+<li>- [ ] Check bottle emptiness</li>
+<li>- [ ] touch sensor as buttons sobstitution</li>
+<li>- [ ] create a PCB for do it easier</li>
+</ul>
