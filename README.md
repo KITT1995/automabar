@@ -8,4 +8,4 @@ Features:
 - Custom cocktails
 <br>
 Todo:
-- Check bottle emptiness
+- [ ] Check bottle emptiness
