@@ -12,7 +12,7 @@
 #define pumpJager 11
 #define pumpRedbull 12
 #define pumpCoke 13
-#define pumpFernet A1
+#define pumpFernet A0
 // tempo in millisecondi che dovrebbe metterci in totale un bicchiere a riempirsi
 #define glassUnityTime 10000
 #define delay 200
@@ -42,5 +42,6 @@ void executeCocktail3ingredients(int minorPart, int mediumPart, int majorPart, i
 void executeCocktail2ingredients(int minorPart,int majorPart, int minorPartPump,int majorPartPump);
 void executeCocktail(int* part, int* pumps, int lenght);
 void initialize_pins();
+void shutdown_pins();
 void callCocktail();
 void callIngredient();

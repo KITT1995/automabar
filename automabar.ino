@@ -14,6 +14,7 @@ void setup() {
   lcd.createChar(0, progressSymbol);
   
   initialize_pins();
+  shutdown_pins();
   //Serial.begin(9600);
 }
 

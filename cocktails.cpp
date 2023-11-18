@@ -3,20 +3,34 @@ extern LiquidCrystal_I2C lcd(0x27, 16, 2);
 // unsigned long currentMillis;
 
 void initialize_pins(){
-  pinMode(pumpGin, OUTPUT);
-  pinMode(pumpVodka, OUTPUT);
-  pinMode(pumpLemon, OUTPUT);
-  pinMode(pumpTonic, OUTPUT);
   pinMode(pumpAperol, OUTPUT);
-  pinMode(pumpProsecco, OUTPUT);
-  pinMode(pumpJager, OUTPUT);
-  pinMode(pumpRedbull, OUTPUT);
-  pinMode(pumpFernet, OUTPUT);
   pinMode(pumpCoke, OUTPUT);
+  pinMode(pumpFernet, OUTPUT);
+  pinMode(pumpGin, OUTPUT);
+  pinMode(pumpJager, OUTPUT);
+  pinMode(pumpLemon, OUTPUT);
+  pinMode(pumpProsecco, OUTPUT);
+  pinMode(pumpRedbull, OUTPUT);
+  pinMode(pumpTonic, OUTPUT);
+  pinMode(pumpVodka, OUTPUT);
 
   pinMode(btnUp, INPUT);
   pinMode(btnDown, INPUT);
   pinMode(btnOk, INPUT);
+}
+
+void shutdown_pins(){
+  digitalWrite(pumpAperol, LOW);
+  digitalWrite(pumpCoke, LOW);
+  digitalWrite(pumpFernet, LOW);
+  digitalWrite(pumpGin, LOW);
+  digitalWrite(pumpJager, LOW);
+  digitalWrite(pumpLemon, LOW);
+  digitalWrite(pumpRedbull, LOW);
+  digitalWrite(pumpProsecco, LOW);
+  digitalWrite(pumpTonic, LOW);
+  digitalWrite(pumpVodka, LOW);
+
 }
 
 void GinLemon() {
@@ -180,38 +194,7 @@ void callIngredient() {
     }
   }while (digitalRead(btnOk) == HIGH);
 
-  switch(selectedValue){
-      case 0:
-        digitalWrite(pumpAperol, LOW);
-        break;
-      case 1:
-        digitalWrite(pumpCoke, LOW);
-        break;
-      case 2:
-        digitalWrite(pumpFernet, LOW);
-        break;
-      case 3:
-        digitalWrite(pumpGin, LOW);
-        break;
-      case 4:
-        digitalWrite(pumpJager, LOW);
-        break;
-      case 5:
-        digitalWrite(pumpLemon, LOW);
-        break;
-      case 6:
-        digitalWrite(pumpProsecco, LOW);
-        break;
-      case 7:
-        digitalWrite(pumpRedbull, LOW);
-        break;
-      case 8:
-        digitalWrite(pumpTonic, LOW);
-        break;
-      case 9:
-        digitalWrite(pumpVodka, LOW);
-        break;
-  }
+  shutdown_pins();
 
   lcd.clear();
   lcd.setCursor(0, 0);
@@ -308,6 +291,8 @@ void executeCocktail(int* part, int* pumps, int lenght){
       } 
     }  
   }while(delivery == 1);
+
+  shutdown_pins();
 
   lcd.clear();
 }
