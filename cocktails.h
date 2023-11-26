@@ -3,16 +3,17 @@
 #define btnUp 2
 #define btnDown 3
 #define btnOk 4
-#define pumpGin 5
-#define pumpVodka 6
-#define pumpLemon 7
-#define pumpTonic 8
-#define pumpAperol 9
-#define pumpProsecco 10
-#define pumpJager 11
+
+#define pumpAperol 5
+#define pumpCoke 6
+#define pumpFernet 7
+#define pumpGin 8
+#define pumpJager 9
+#define pumpLemon 10
+#define pumpProsecco 11
 #define pumpRedbull 12
-#define pumpCoke 13
-#define pumpFernet A0
+#define pumpTonic 13
+#define pumpVodka A0
 // tempo in millisecondi che dovrebbe metterci in totale un bicchiere a riempirsi
 #define glassUnityTime 10000
 #define delay 200

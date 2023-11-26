@@ -20,16 +20,16 @@ void initialize_pins(){
 }
 
 void shutdown_pins(){
-  digitalWrite(pumpAperol, LOW);
-  digitalWrite(pumpCoke, LOW);
-  digitalWrite(pumpFernet, LOW);
-  digitalWrite(pumpGin, LOW);
-  digitalWrite(pumpJager, LOW);
-  digitalWrite(pumpLemon, LOW);
-  digitalWrite(pumpRedbull, LOW);
-  digitalWrite(pumpProsecco, LOW);
-  digitalWrite(pumpTonic, LOW);
-  digitalWrite(pumpVodka, LOW);
+  digitalWrite(pumpAperol, HIGH);
+  digitalWrite(pumpCoke, HIGH);
+  digitalWrite(pumpFernet, HIGH);
+  digitalWrite(pumpGin, HIGH);
+  digitalWrite(pumpJager, HIGH);
+  digitalWrite(pumpLemon, HIGH);
+  digitalWrite(pumpRedbull, HIGH);
+  digitalWrite(pumpProsecco, HIGH);
+  digitalWrite(pumpTonic, HIGH);
+  digitalWrite(pumpVodka, HIGH);
 
 }
 
@@ -162,7 +162,7 @@ void callIngredient() {
   do{
     switch(selectedValue){
       case 0:
-        digitalWrite(pumpAperol, HIGH);
+        digitalWrite(pumpAperol, LOW);
         break;
       case 1:
         digitalWrite(pumpCoke, HIGH);
