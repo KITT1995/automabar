@@ -12,5 +12,5 @@ Todo:
 <ul>
 <li>- [ ] Check bottle emptiness</li>
 <li>- [ ] touch sensor as buttons sobstitution</li>
-<li>- [ ] create a PCB for do it easier</li>
+<li>- [ ] create a PCB to do it easier</li>
 </ul>
