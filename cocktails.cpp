@@ -165,31 +165,31 @@ void callIngredient() {
         digitalWrite(pumpAperol, LOW);
         break;
       case 1:
-        digitalWrite(pumpCoke, HIGH);
+        digitalWrite(pumpCoke, LOW);
         break;
       case 2:
-        digitalWrite(pumpFernet, HIGH);
+        digitalWrite(pumpFernet, LOW);
         break;
       case 3:
-        digitalWrite(pumpGin, HIGH);
+        digitalWrite(pumpGin, LOW);
         break;
       case 4:
-        digitalWrite(pumpJager, HIGH);
+        digitalWrite(pumpJager, LOW);
         break;
       case 5:
-        digitalWrite(pumpLemon, HIGH);
+        digitalWrite(pumpLemon, LOW);
         break;
       case 6:
-        digitalWrite(pumpProsecco, HIGH);
+        digitalWrite(pumpProsecco, LOW);
         break;
       case 7:
-        digitalWrite(pumpRedbull, HIGH);
+        digitalWrite(pumpRedbull, LOW);
         break;
       case 8:
-        digitalWrite(pumpTonic, HIGH);
+        digitalWrite(pumpTonic, LOW);
         break;
       case 9:
-        digitalWrite(pumpVodka, HIGH);
+        digitalWrite(pumpVodka, LOW);
         break;
     }
   }while (digitalRead(btnOk) == HIGH);
@@ -245,8 +245,8 @@ void initializeCocktail(int* pumpsVet, int lenght){
   //Serial.println(lenght);
   for(int i = 0; i < lenght; i++){
     //accende tutte le pompe che devono essere utilizzate
-    //Serial.println(pumpsVet[i]);
-    digitalWrite(pumpsVet[i], HIGH);
+    Serial.println(pumpsVet[i]);
+    digitalWrite(pumpsVet[i], LOW);
   }
 }
 
@@ -270,7 +270,7 @@ void executeCocktail(int* part, int* pumps, int lenght){
   do{
     for(int i = 0; i < totParts; i++){
       if (millis() - timer >= (glassUnityTime / sumParts) * part[i]){
-        digitalWrite(pumps[i], LOW);
+        digitalWrite(pumps[i], HIGH);
         if(i == (totParts-1)){
           delivery = 0;
         }          
@@ -284,7 +284,7 @@ void executeCocktail(int* part, int* pumps, int lenght){
     if (digitalRead(btnOk) == HIGH) {
       if (millis() - timer >= delay){
         for(int i = 0; i < totParts; i++){
-          digitalWrite(pumps[i], LOW);
+          digitalWrite(pumps[i], HIGH);
         }
         delivery = 0;
         timer = millis();
