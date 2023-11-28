@@ -13,4 +13,5 @@ Todo:
 <li>- [ ] Check bottle emptiness</li>
 <li>- [ ] touch sensor as buttons sobstitution</li>
 <li>- [ ] create a PCB to do it easier</li>
+<li>- [ ] Alexa or Google integration</li>
 </ul>
