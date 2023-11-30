@@ -3,9 +3,9 @@ WIP Project of a domotic bar with Arduino.
 <br>
 <br>
 Features:
-- 8 cocktails
-- 10 ingredients
-- Custom cocktails
+- 10 ingredients    (alcholic and not)
+- 8 cocktails       (300 ml glasses)
+- Custom cocktails  (you can personilize your cocktail by adding single ingredient manually)
 <br>
 Todo:
 <br>
