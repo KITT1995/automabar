@@ -17,7 +17,7 @@
 #define pumpVodka A0
 // tempo in millisecondi che dovrebbe metterci in totale un bicchiere a riempirsi
 #define glassUnityTime 12500
-#define delay 400
+#define delay 300
 #define totCocktails 9
 #define totIngredients 11
 #define progrSymbol B11111
@@ -39,10 +39,9 @@ void JagerBomb ();
 void Spritz ();
 void Fernesito();
 void Manual();
-void initializeCocktail(int *pumps, int lenght);
-void executeCocktail3ingredients(int minorPart, int mediumPart, int majorPart, int minorPartPump,int mediumPartPump, int majorPartPump);
-void executeCocktail2ingredients(int minorPart,int majorPart, int minorPartPump,int majorPartPump);
-void executeCocktail(int* part, int* pumps, int lenght);
+void initializeCocktail(int *pumps, int lenght, String cocktail);
+void executeSingleIngredients(String ingredient, int pump);
+void executeCocktail(String cocktail, int* part, int* pumps, int lenght, int glassUnityTimePersonal);
 void initialize_pins();
 void shutdown_pins();
 void callCocktail();
