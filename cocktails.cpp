@@ -86,7 +86,8 @@ void Spritz() {
   // 3 prosecco, 2 aperol e 1 tonica
   int pumps[] = {pumpTonic,pumpAperol,pumpProsecco};
   int parts[] = {1,2,6};
-  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + ((glassUnityTime/9)*3));   
+  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*3));
+  //executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + ((glassUnityTime/9)*3));   
 }
 
 void Fernesito(){
@@ -94,7 +95,8 @@ void Fernesito(){
   int pumps[] = {pumpFernet,pumpCoke};
   int parts[] = {1,7};
   //8 sarebbe 1+7 mentre 3 sarebbe la differenza tra il totale delle parti originali e il totale delle parti attuali
-  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]), glassUnityTime + ((glassUnityTime/8)*3));   
+  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*3));
+  //executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]), glassUnityTime + ((glassUnityTime/8)*3));   
 }
 
 void Manual(){
@@ -290,12 +292,12 @@ void initializeCocktail(int* pumpsVet, int lenght, String cocktail){
 void executeCocktail(String cocktail, int* part, int* pumps, int lenght, int glassUnityTimePersonal){
   
   initializeCocktail(pumps, lenght, cocktail);
-  int sumParts = 0;
   int totParts = lenght;
-
+  /*int sumParts = 0;
   for(int i = 0; i<totParts; i++){
     sumParts += part[i];
-  }
+  }*/
+  int sumParts = arraySum(part, arraySum(part, sizeof(part)/sizeof(part[0])));
 
   do{
     for(int i = 0; i < totParts; i++){
@@ -328,3 +330,11 @@ void executeCocktail(String cocktail, int* part, int* pumps, int lenght, int gla
 
   lcd.clear();
 }
+
+int arraySum(int* array, int length) {
+  int sum = 0;
+  for(int i = 0; i<length; i++){
+    sum += array[i];
+  }
+  return sum;
+};
