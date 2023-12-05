@@ -293,11 +293,11 @@ void executeCocktail(String cocktail, int* part, int* pumps, int lenght, int gla
   
   initializeCocktail(pumps, lenght, cocktail);
   int totParts = lenght;
-  /*int sumParts = 0;
+  int sumParts = 0;
   for(int i = 0; i<totParts; i++){
     sumParts += part[i];
-  }*/
-  int sumParts = arraySum(part, arraySum(part, sizeof(part)/sizeof(part[0])));
+  }
+  //int sumParts = arraySum(part, arraySum(part, sizeof(part)/sizeof(part[0])));
 
   do{
     for(int i = 0; i < totParts; i++){
