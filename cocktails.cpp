@@ -266,7 +266,7 @@ void callCocktail() {
   } 
 }
 
-void initializeCocktail(int* pumpsVet, int lenght, String cocktail){
+void initializeCocktail(int* pumpsVet, int length, String cocktail){
   
   lcd.clear();
   lcd.setCursor(0, 0);
@@ -274,8 +274,8 @@ void initializeCocktail(int* pumpsVet, int lenght, String cocktail){
   //inizializza l'lcd impostando il nome del cocktail che sta per eseguire
   delivery = 1;
   
-  //Serial.println(lenght);
-  for(int i = 0; i < lenght; i++){
+  //Serial.println(length);
+  for(int i = 0; i < length; i++){
     //accende tutte le pompe che devono essere utilizzate
     Serial.println(pumpsVet[i]);
     digitalWrite(pumpsVet[i], LOW);
@@ -285,19 +285,19 @@ void initializeCocktail(int* pumpsVet, int lenght, String cocktail){
 /*
   @*part è il vettore delle parti di ogni ingrediente. il vettore deve essere in ordine crescente
   @*pumps è il vettore degli ingredienti rispettivamente alle parti
-  @lenght è la lunghezz del vettore
+  @length è la lunghezz del vettore
   si può migliorare il codice facendo un piccolo metodo che ordina il vettore delle parti e il rispettivo
   vettore degli ingredienti
 */
-void executeCocktail(String cocktail, int* part, int* pumps, int lenght, int glassUnityTimePersonal){
+void executeCocktail(String cocktail, int* part, int* pumps, int length, int glassUnityTimePersonal){
   
-  initializeCocktail(pumps, lenght, cocktail);
-  int totParts = lenght;
-  int sumParts = 0;
+  initializeCocktail(pumps, length, cocktail);
+  int totParts = length;
+  /*int sumParts = 0;
   for(int i = 0; i<totParts; i++){
     sumParts += part[i];
-  }
-  //int sumParts = arraySum(part, arraySum(part, sizeof(part)/sizeof(part[0])));
+  }*/
+  int sumParts = arraySum(part, length);
 
   do{
     for(int i = 0; i < totParts; i++){
