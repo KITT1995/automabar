@@ -13,5 +13,5 @@ Todo:
 <li>- [ ] Check bottle emptiness</li>
 <li>- [ ] Display touch </li>
 <li>- [ ] create a PCB to do it easier</li>
-<li>- [ ] Alexa or Google integration</li>
+<li>- [ ] Alexa/Google integration or custom IA</li>
 </ul>
