@@ -85,18 +85,18 @@ void JagerBomb() {
 void Spritz() {
   // 3 prosecco, 2 aperol e 1 tonica
   int pumps[] = {pumpTonic,pumpAperol,pumpProsecco};
-  int parts[] = {1,2,6};
-  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*3));
+  int parts[] = {4,3,9};
+  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*9));
   //executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + ((glassUnityTime/9)*3));   
 }
 
 void Fernesito(){
   //1 fernet e 4 coca
   int pumps[] = {pumpFernet,pumpCoke};
-  int parts[] = {1,7};
-  //8 sarebbe 1+7 mentre 3 sarebbe la differenza tra il totale delle parti originali e il totale delle parti attuali
-  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*3));
-  //executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]), glassUnityTime + ((glassUnityTime/8)*3));   
+  int parts[] = {2,7};
+  //9 sarebbe 2+7 mentre 4 sarebbe la differenza tra il totale delle parti originali e il totale delle parti attuali
+  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*4));
+  //executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]), glassUnityTime + ((glassUnityTime/9)*4));   
 }
 
 void Manual(){
