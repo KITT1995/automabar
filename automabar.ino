@@ -1,6 +1,8 @@
 #include "cocktails.h"
 
-int selectedValue = 0;
+int selectedValueCocktail = 0;
+int selectedValueIngredient = 0;
+
 unsigned long timer = 0;
 bool delivery = 0;
 byte progressSymbol[] = {progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol, progrSymbol};
@@ -27,20 +29,20 @@ void loop() {
     lcd.print("Selezionare");
     //setta il cursore sulla prima colonna e seconda riga per poter scrivere
     lcd.setCursor(0, 1);
-    lcd.print(cocktail[selectedValue]);
+    lcd.print(cocktail[selectedValueCocktail]);
     
     //questo delay evita che cliccndo il pulsante per qualche millisecondo in più salti dei cocktail
     if (millis() - timer >= delay) {
       //delay
       if (digitalRead(btnUp) == HIGH) {
-        selectedValue = manageButtonUp(selectedValue);
-        //Serial.println(cocktail[selectedValue]);
+        selectedValueCocktail = manageButtonUp(selectedValueCocktail);
+        //Serial.println(cocktail[selectedValueCocktail]);
         lcd.clear();
         timer = millis();
       }
       else if (digitalRead(btnDown) == HIGH) {
-        selectedValue = manageButtonDown(selectedValue);
-        //Serial.println(cocktail[selectedValue]);
+        selectedValueCocktail = manageButtonDown(selectedValueCocktail);
+        //Serial.println(cocktail[selectedValueCocktail]);
         lcd.clear();
         timer = millis();
       }
@@ -58,32 +60,32 @@ void loop() {
   }
 }
 
-int manageButtonUp(int selectedValue){
+int manageButtonUp(int selectedValueCocktail){
 
-  if (selectedValue == 0) {
+  if (selectedValueCocktail == 0) {
     //se viene cliccato il pulsante freccia su quando il cocktail selezionato 
     //è il primo allora si giunge all'ultimo selezionato altrimenti si prosegue con la lista
-    selectedValue = totCocktails - 1;
+    selectedValueCocktail = totCocktails - 1;
   }
   else {
-    selectedValue -= 1;
+    selectedValueCocktail -= 1;
   }
 
-  return selectedValue;
+  return selectedValueCocktail;
 
 }
 
-int manageButtonDown(int selectedValue){
+int manageButtonDown(int selectedValueCocktail){
 
-  if (selectedValue == totCocktails - 1) {
+  if (selectedValueCocktail == totCocktails - 1) {
     //al contrario se il cocktail selezionato è l'ultimo
-    selectedValue = 0;
+    selectedValueCocktail = 0;
   }
   else {
-    selectedValue += 1;
+    selectedValueCocktail += 1;
   }
 
-  return selectedValue;
+  return selectedValueCocktail;
 
 }
 

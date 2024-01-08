@@ -24,7 +24,8 @@
 
 extern LiquidCrystal_I2C lcd;
 extern bool delivery;
-extern int selectedValue;
+extern int selectedValueCocktail;
+extern int selectedValueIngredient;
 extern unsigned long timer;
 extern String cocktail[];
 extern String ingredients[];
