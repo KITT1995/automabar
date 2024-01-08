@@ -47,6 +47,11 @@ void loop() {
       else if (digitalRead(btnOk) == HIGH) {
         delivery = 1;
         timer = millis();
+        while(digitalRead(btnOk) == HIGH){
+          if(millis() - timer >= 2000)
+            allPumps();
+        }
+        timer = millis();
         callCocktail();
       }
     } 

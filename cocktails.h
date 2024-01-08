@@ -47,3 +47,4 @@ void shutdown_pins();
 void callCocktail();
 void callIngredient();
 extern int arraySum(int* array, int length);
+void allPumps();

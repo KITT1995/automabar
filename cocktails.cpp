@@ -33,6 +33,29 @@ void shutdown_pins(){
 
 }
 
+void turnOnAll(){
+  digitalWrite(pumpAperol, LOW);
+  digitalWrite(pumpCoke, LOW);
+  digitalWrite(pumpFernet, LOW);
+  digitalWrite(pumpGin, LOW);
+  digitalWrite(pumpJager, LOW);
+  digitalWrite(pumpLemon, LOW);
+  digitalWrite(pumpRedbull, LOW);
+  digitalWrite(pumpProsecco, LOW);
+  digitalWrite(pumpTonic, LOW);
+  digitalWrite(pumpVodka, LOW);
+}
+
+
+void allPumps(){
+  int pumps[] = {pumpAperol, pumpCoke, pumpFernet, pumpGin, pumpJager};
+  int pumps2[] = {pumpLemon, pumpRedbull, pumpProsecco, pumpTonic, pumpVodka};
+  int parts[] = {1,1,1,1,1};
+ // inizializeCocktail(pumps);
+  executeCocktail("Cleaning", parts, pumps, sizeof(pumps)/sizeof(pumps[0]),5000);
+  executeCocktail("Cleaning", parts, pumps2, sizeof(pumps2)/sizeof(pumps2[0]),5000);  
+}
+
 void GinLemon() {
   // una parte di gin e due di lemon
   //currentMillis = millis();
@@ -44,7 +67,7 @@ void GinLemon() {
 
 void GinTonic() {
   // una parte di gin e due di tonica
-  int pumps[] = {pumpGin,pumpLemon};
+  int pumps[] = {pumpGin,pumpTonic};
   int parts[] = {1,2};
  // inizializeCocktail(pumps);
   executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime);  
@@ -66,6 +89,7 @@ void VodkaLemon() {
   executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime);  
 }
 
+
 void VodkaRedbull() {
   // una 3 di vodka e 7 di redbull
   int pumps[] = {pumpVodka,pumpRedbull};
@@ -85,8 +109,8 @@ void JagerBomb() {
 void Spritz() {
   // 3 prosecco, 2 aperol e 1 tonica
   int pumps[] = {pumpTonic,pumpAperol,pumpProsecco};
-  int parts[] = {4,3,9};
-  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*9));
+  int parts[] = {3,2,8};
+  executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*6));
   //executeCocktail(cocktail[selectedValue], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + ((glassUnityTime/9)*3));   
 }
 
