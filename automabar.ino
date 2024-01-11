@@ -17,7 +17,7 @@ void setup() {
   
   initialize_pins();
   shutdown_pins();
-  //Serial.begin(9600);
+  Serial.begin(9600);
 }
 
 void loop() {
@@ -31,9 +31,9 @@ void loop() {
     lcd.setCursor(0, 1);
     lcd.print(cocktail[selectedValueCocktail]);
     
-    //questo delay evita che cliccndo il pulsante per qualche millisecondo in più salti dei cocktail
-    if (millis() - timer >= delay) {
-      //delay
+    //questo delay2 evita che cliccndo il pulsante per qualche millisecondo in più salti dei cocktail
+    if (millis() - timer >= delay2) {
+      //delay2
       if (digitalRead(btnUp) == HIGH) {
         selectedValueCocktail = manageButtonUp(selectedValueCocktail);
         //Serial.println(cocktail[selectedValueCocktail]);
@@ -50,11 +50,21 @@ void loop() {
         delivery = 1;
         timer = millis();
         while(digitalRead(btnOk) == HIGH){
-          if(millis() - timer >= 2000)
+          if(millis() - timer >= 2000){
+            timer = millis();
             allPumps();
+            //delivery = 0;
+            //delay(600);
+          }            
         }
-        timer = millis();
-        callCocktail();
+        
+        if (millis() - timer <= delay2){
+          
+          callCocktail();
+        }else
+        delivery = 0;
+          
+         
       }
     } 
   }
