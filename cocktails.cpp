@@ -1,6 +1,5 @@
 #include "cocktails.h"
 extern LiquidCrystal_I2C lcd(0x27, 16, 2);
-// unsigned long currentMillis;
 
 void initialize_pins(){
   pinMode(pumpAperol, OUTPUT);
@@ -30,7 +29,6 @@ void shutdown_pins(){
   digitalWrite(pumpProsecco, HIGH);
   digitalWrite(pumpTonic, HIGH);
   digitalWrite(pumpVodka, HIGH);
-
 }
 
 
@@ -39,20 +37,16 @@ void allPumps(){
   int pumps[] = {pumpAperol, pumpCoke, pumpFernet, pumpGin, pumpJager};
   int pumps2[] = {pumpProsecco, pumpTonic, pumpVodka,pumpLemon, pumpRedbull};
   int parts[] = {1,1,1,1,1};
- // inizializeCocktail(pumps);
   executeCocktail("Cleaning p1", parts, pumps, sizeof(pumps)/sizeof(pumps[0]),11000);
-  //delay(17500);
   timer = millis();
-  delay(100);
+  //delay(100);
   delivery = executeCocktail("Cleaning p2", parts, pumps2, sizeof(pumps2)/sizeof(pumps2[0]),11000);  
 }
 
 void GinLemon() {
   // una parte di gin e due di lemon
-  //currentMillis = millis();
   int pumps[] = {pumpGin,pumpLemon};
   int parts[] = {1,2};
- // inizializeCocktail(pumps);
   delivery = executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime);  
 }
 
@@ -60,7 +54,6 @@ void GinTonic() {
   // una parte di gin e due di tonica
   int pumps[] = {pumpGin,pumpTonic};
   int parts[] = {1,2};
- // inizializeCocktail(pumps);
   delivery = executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime);  
 }
 
@@ -68,7 +61,6 @@ void VodkaTonic() {
   // una parte di vodka e due di tonica
   int pumps[] = {pumpVodka,pumpTonic};
   int parts[] = {1,2};
-  //inizializeCocktail(pumps);
   delivery = executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime);    
 }
 
@@ -76,7 +68,6 @@ void VodkaLemon() {
   // una parte di vodka e due di lemon
   int pumps[] = {pumpVodka,pumpLemon};
   int parts[] = {1,2};
-  //inizializeCocktail(pumps);
   delivery = executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime);  
 }
 
@@ -85,7 +76,6 @@ void VodkaRedbull() {
   // una 3 di vodka e 7 di redbull
   int pumps[] = {pumpVodka,pumpRedbull};
   int parts[] = {3,7};
-  //inizializeCocktail(pumps);
   delivery = executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime);  
 }
 
@@ -93,7 +83,6 @@ void JagerBomb() {
   // una parte di jager e tre di redbull
   int pumps[] = {pumpJager,pumpRedbull};
   int parts[] = {1,3};
-  //inizializeCocktail(pumps);
   delivery = executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime);   
 }
 
@@ -102,7 +91,6 @@ void Spritz() {
   int pumps[] = {pumpTonic,pumpAperol,pumpProsecco};
   int parts[] = {3,2,8};
   delivery = executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*6));
-  //executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + ((glassUnityTime/9)*3));   
 }
 
 void Fernesito(){
@@ -111,7 +99,6 @@ void Fernesito(){
   int parts[] = {2,7};
   //9 sarebbe 2+7 mentre 4 sarebbe la differenza tra il totale delle parti originali e il totale delle parti attuali
   delivery = executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]),glassUnityTime + (glassUnityTime/arraySum(parts, sizeof(parts)/sizeof(parts[0]))*4));
-  //executeCocktail(cocktail[selectedValueCocktail], parts, pumps, sizeof(pumps)/sizeof(pumps[0]), glassUnityTime + ((glassUnityTime/9)*4));   
 }
 
 void Manual(){
@@ -122,50 +109,35 @@ void Manual(){
   lcd.print(ingredients[selectedValueIngredient]);
   do{
     if (millis() - timer >= delay2) {
-      //delay2
       if (digitalRead(btnOk) == HIGH) {
-        if (selectedValueIngredient < totIngredients - 1){          
+        //if (selectedValueIngredient < totIngredients - 1){          
           timer = millis();
           callIngredient();
-        }
+       /* }
         else {
-          selectedValueIngredient = totCocktails - 1;
+          selectedValueIngredient = totIngredients - 1;
           delivery = 0;
           timer = millis();
           lcd.clear();
           return;
-        }
+        }*/
       }
       else if (digitalRead(btnUp) == HIGH) {
-        if (selectedValueIngredient == 0) {
-          selectedValueIngredient = totIngredients - 1;
-        }
-        else {
-          selectedValueIngredient -= 1;
-        }
+        selectedValueIngredient = manageButtonUp(selectedValueIngredient, totIngredients);        
         //Serial.println(ingredients[selectedValueCocktail]);
         timer = millis();
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Selezionare");
-        lcd.setCursor(0, 1);
-        lcd.print(ingredients[selectedValueIngredient]);
+        lcd.clear();        
       }
       else if (digitalRead(btnDown) == HIGH) {
-        if (selectedValueIngredient == totIngredients - 1) {
-          selectedValueIngredient = 0;
-        }
-        else {
-          selectedValueIngredient += 1;
-        }
+        selectedValueIngredient = manageButtonDown(selectedValueIngredient, totIngredients);
         //Serial.println(ingredients[selectedValueCocktail]);
         timer = millis();
-        lcd.clear();
-        lcd.setCursor(0, 0);
-        lcd.print("Selezionare");
-        lcd.setCursor(0, 1);
-        lcd.print(ingredients[selectedValueIngredient]);
+        lcd.clear();        
       }
+      lcd.setCursor(0, 0);
+      lcd.print("Selezionare");
+      lcd.setCursor(0, 1);
+      lcd.print(ingredients[selectedValueIngredient]);
     } 
   }while(delivery == 1);
 }
@@ -179,61 +151,37 @@ void executeSingleIngredients(String ingredient, int pump){
 
 
 void callIngredient() {
-  /*lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("Erogazione");
-  lcd.setCursor(0, 1);
-  lcd.print(ingredients[selectedValueCocktail]);
-  */
   
-    switch(selectedValueIngredient){
+      switch(selectedValueIngredient){
       case 0:
         executeSingleIngredients(ingredients[selectedValueIngredient], pumpAperol);
-        //digitalWrite(pumpAperol, LOW);
         break;
       case 1:
         executeSingleIngredients(ingredients[selectedValueIngredient], pumpCoke);        
-        //digitalWrite(pumpCoke, LOW);
         break;
       case 2:
-        executeSingleIngredients(ingredients[selectedValueIngredient], pumpFernet);        
-        
-        //digitalWrite(pumpFernet, LOW);
+        executeSingleIngredients(ingredients[selectedValueIngredient], pumpFernet);    
         break;
       case 3:
-        executeSingleIngredients(ingredients[selectedValueIngredient], pumpGin);        
-              
-        //digitalWrite(pumpGin, LOW);
+        executeSingleIngredients(ingredients[selectedValueIngredient], pumpGin);   
         break;
       case 4:
-        executeSingleIngredients(ingredients[selectedValueIngredient], pumpJager);        
-        
-        //digitalWrite(pumpJager, LOW);
+        executeSingleIngredients(ingredients[selectedValueIngredient], pumpJager);  
         break;
       case 5:
-        executeSingleIngredients(ingredients[selectedValueIngredient], pumpLemon);        
-        
-        //digitalWrite(pumpLemon, LOW);
+        executeSingleIngredients(ingredients[selectedValueIngredient], pumpLemon);  
         break;
       case 6:
-        executeSingleIngredients(ingredients[selectedValueIngredient], pumpProsecco);        
-        
-        //digitalWrite(pumpProsecco, LOW);
+        executeSingleIngredients(ingredients[selectedValueIngredient], pumpProsecco);  
         break;
       case 7:
-        executeSingleIngredients(ingredients[selectedValueIngredient], pumpRedbull);        
-        
-        //digitalWrite(pumpRedbull, LOW);
+        executeSingleIngredients(ingredients[selectedValueIngredient], pumpRedbull);  
         break;
       case 8:
-        executeSingleIngredients(ingredients[selectedValueIngredient], pumpTonic);        
-        
-        //digitalWrite(pumpTonic, LOW);
+        executeSingleIngredients(ingredients[selectedValueIngredient], pumpTonic);     
         break;
       case 9:
-        executeSingleIngredients(ingredients[selectedValueIngredient], pumpVodka);        
-        
-        //digitalWrite(pumpVodka, LOW);
+        executeSingleIngredients(ingredients[selectedValueIngredient], pumpVodka);   
         break;
       default: 
         break;
@@ -286,7 +234,7 @@ void initializeCocktail(int* pumpsVet, int length, String cocktail){
   lcd.setCursor(0, 0);
   lcd.print(cocktail);
   //inizializza l'lcd impostando il nome del cocktail che sta per eseguire
-  //delivery = 1;
+  
   
   //Serial.println(length);
   for(int i = 0; i < length; i++){
@@ -306,21 +254,16 @@ void initializeCocktail(int* pumpsVet, int length, String cocktail){
 int executeCocktail(String cocktail, int* part, int* pumps, int length, int glassUnityTimePersonal){
   
   initializeCocktail(pumps, length, cocktail);
+
   int totParts = length;
-  /*int sumParts = 0;
-  for(int i = 0; i<totParts; i++){
-    sumParts += part[i];
-  }*/
   int sumParts = arraySum(part, length);
   int internalDelivery = 1;
 
   do{
     for(int i = 0; i < totParts; i++){
       if (millis() - timer >= (glassUnityTimePersonal / sumParts) * part[i]){
-        Serial.println("shutdown ");
-        
-        Serial.println(pumps[i]);
-
+        //Serial.println("shutdown ");        
+        //Serial.println(pumps[i]);
         digitalWrite(pumps[i], HIGH);
         if(i == (totParts-1)){
           internalDelivery = 0;
@@ -353,4 +296,29 @@ int arraySum(int* array, int length) {
     sum += array[i];
   }
   return sum;
-};
+}
+
+int manageButtonUp(int selectedValue, int totSelectable){
+
+  if (selectedValue == 0) {
+    //se viene cliccato il pulsante freccia su quando il cocktail selezionato 
+    //è il primo allora si giunge all'ultimo selezionato altrimenti si prosegue con la lista
+    selectedValue = totSelectable - 1;
+  }
+  else {
+    selectedValue -= 1;
+  }
+  return selectedValue;
+}
+
+int manageButtonDown(int selectedValue, int totSelectable){
+
+  if (selectedValue == totSelectable - 1) {
+    //al contrario se il cocktail selezionato è l'ultimo
+    selectedValue = 0;
+  }
+  else {
+    selectedValue += 1;
+  }
+  return selectedValue;
+}

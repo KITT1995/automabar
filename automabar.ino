@@ -17,7 +17,7 @@ void setup() {
   
   initialize_pins();
   shutdown_pins();
-  Serial.begin(9600);
+  //Serial.begin(9600);
 }
 
 void loop() {
@@ -33,15 +33,14 @@ void loop() {
     
     //questo delay2 evita che cliccndo il pulsante per qualche millisecondo in più salti dei cocktail
     if (millis() - timer >= delay2) {
-      //delay2
       if (digitalRead(btnUp) == HIGH) {
-        selectedValueCocktail = manageButtonUp(selectedValueCocktail);
+        selectedValueCocktail = manageButtonUp(selectedValueCocktail, totCocktails);
         //Serial.println(cocktail[selectedValueCocktail]);
         lcd.clear();
         timer = millis();
       }
       else if (digitalRead(btnDown) == HIGH) {
-        selectedValueCocktail = manageButtonDown(selectedValueCocktail);
+        selectedValueCocktail = manageButtonDown(selectedValueCocktail, totCocktails);
         //Serial.println(cocktail[selectedValueCocktail]);
         lcd.clear();
         timer = millis();
@@ -53,49 +52,13 @@ void loop() {
           if(millis() - timer >= 2000){
             timer = millis();
             allPumps();
-            //delivery = 0;
-            //delay(600);
           }            
-        }
-        
-        if (millis() - timer <= delay2){
-          
+        }        
+        if (millis() - timer <= delay2)          
           callCocktail();
-        }else
-        delivery = 0;
-          
-         
+        else
+          delivery = 0;         
       }
     } 
   }
 }
-
-int manageButtonUp(int selectedValueCocktail){
-
-  if (selectedValueCocktail == 0) {
-    //se viene cliccato il pulsante freccia su quando il cocktail selezionato 
-    //è il primo allora si giunge all'ultimo selezionato altrimenti si prosegue con la lista
-    selectedValueCocktail = totCocktails - 1;
-  }
-  else {
-    selectedValueCocktail -= 1;
-  }
-
-  return selectedValueCocktail;
-
-}
-
-int manageButtonDown(int selectedValueCocktail){
-
-  if (selectedValueCocktail == totCocktails - 1) {
-    //al contrario se il cocktail selezionato è l'ultimo
-    selectedValueCocktail = 0;
-  }
-  else {
-    selectedValueCocktail += 1;
-  }
-
-  return selectedValueCocktail;
-
-}
-

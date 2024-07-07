@@ -49,3 +49,5 @@ void callCocktail();
 void callIngredient();
 extern int arraySum(int* array, int length);
 void allPumps();
+int manageButtonDown(int selectedValue, int totSelectable);
+int manageButtonUp(int selectedValue, int totSelectable);
